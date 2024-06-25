@@ -1,0 +1,13 @@
+language: node_js
+node_js:
+  - "14"
+services:
+  - docker
+before_script:
+  - git clone https://github.com/lucas-marchi/tac-spring-boot
+script:
+  - docker build -t minha-aplicacao .
+  - docker run -d --name minha-aplicacao-container minha-aplicacao
+after_script:
+  - docker stop minha-aplicacao-container
+  - docker rm minha-aplicacao-container
